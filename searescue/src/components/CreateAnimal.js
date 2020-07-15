@@ -88,7 +88,7 @@ class CreateAnimal extends Component {
 
                 <div className='form-group'>
                   <input
-                    type='text'
+                    type='number'
                     placeholder='Age'
                     name='age'
                     className='form-control'
@@ -97,7 +97,7 @@ class CreateAnimal extends Component {
                   />
                 </div>
 
-		            <div className='form-group'>
+		        <div className='form-group'>
                   <input
                     type='date'
                     placeholder='Rescue date'

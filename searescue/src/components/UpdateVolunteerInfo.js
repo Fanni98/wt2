@@ -88,7 +88,7 @@ class UpdateVolunteerInfo extends Component {
             <div className='form-group'>
             <label htmlFor="age">Age</label>
               <input
-                type='text'
+                type='number'
                 placeholder='Age'
                 name='age'
                 className='form-control'

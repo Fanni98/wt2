@@ -102,7 +102,7 @@ class UpdateAnimalInfo extends Component {
             <div className='form-group'>
             <label htmlFor="age">Age</label>
               <input
-                type='text'
+                type='number'
                 placeholder='age'
                 name='age'
                 className='form-control'

@@ -6,7 +6,7 @@ const VolunteerSchema = new mongoose.Schema({
     required: true
   },
   age: {
-    type: String,
+    type: Number,
     required: true
   },
   updated_date: {

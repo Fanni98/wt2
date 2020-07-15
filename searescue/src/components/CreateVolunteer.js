@@ -71,7 +71,7 @@ class CreateVolunteer extends Component {
 
                 <div className='form-group'>
                   <input
-                    type='text'
+                    type='number'
                     placeholder='Age'
                     name='age'
                     className='form-control'
