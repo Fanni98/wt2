@@ -2,40 +2,45 @@ import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import AnimalCard from './AnimalCard';
+import TodoCard from './TodoCard';
 
-class ShowAnimalList extends Component {
+
+
+class ShowTodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      animals: []
+      todos: []
     };
   }
 
+ 
+
   componentDidMount() {
     axios
-      .get('http://localhost:8082/api/animals')
+      .get('http://localhost:8082/api/todos')
       .then(res => {
         this.setState({
-          animals: res.data
+          todos: res.data
         })
       })
       .catch(err =>{
-        console.log('Error from ShowAnimalList');
+        console.log('Error from ShowTodoList');
       })
   };
+  
 
 
   render() {
-    const animals = this.state.animals;
-    console.log("PrintAnimal: " + animals);
-    let animalList;
+    const todos = this.state.todos;
+    console.log("PrintTodo: " + todos);
+    let todoList;
 
-    if(!animals) {
-      animalList = "there is no animal record!";
+    if(!todos) {
+        todoList = "there is no todo record!";
     } else {
-      animalList = animals.map((animal, k) =>
-        <AnimalCard animal={animal} key={k} />
+        todoList = todos.map((todo, k) =>
+        <TodoCard todo={todo} key={k} />
       );
     }
 
@@ -45,12 +50,12 @@ class ShowAnimalList extends Component {
           <div className="row">
             <div className="col-md-12">
               <br />
-              <h2 className="display-4 text-center">Animals List</h2>
+              <h2 className="display-4 text-center">Feladatok listája</h2>
             </div>
 
             <div className="col-md-11">
-              <Link to="/create-animal" className="btn btn-outline-warning float-right">
-                + Add New Animal
+              <Link to="/create-todo" className="btn btn-outline-warning float-right">
+                +
               </Link>
               <br />
               <br />
@@ -58,9 +63,8 @@ class ShowAnimalList extends Component {
             </div>
 
           </div>
-
           <div className="list">
-                {animalList}
+                {todoList}
           </div>
         </div>
       </div>
@@ -68,4 +72,4 @@ class ShowAnimalList extends Component {
   }
 }
 
-export default ShowAnimalList;
+export default ShowTodoList;

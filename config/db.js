@@ -4,8 +4,7 @@ const db = config.get('mongoURI');
 
 const connectDB = async () => {
   try {
-
-    //await mongoose.connect('mongodb://localhost:27017/Fanni_assignmentDB')
+    
     await mongoose.connect(
       db,
       {

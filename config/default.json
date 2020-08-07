@@ -1,6 +1,6 @@
 {
     "mongoURI":
-      "mongodb+srv://user:psw12@db.2zsxv.mongodb.net/db?retryWrites=true&w=majority"
+      "mongodb+srv://user:psw12@db.2zsxv.mongodb.net/mgl_project?retryWrites=true&w=majority"
   }
   
   

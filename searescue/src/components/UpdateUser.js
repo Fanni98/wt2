@@ -3,28 +3,28 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
-class UpdateVolunteerInfo extends Component {
+class UpdateUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      age: ''
+      password: ''
     };
   }
 
   componentDidMount() {
     // console.log("Print id: " + this.props.match.params.id);
     axios
-      .get('http://localhost:8082/api/volunteers/'+this.props.match.params.id)
+      .get('http://localhost:8082/api/users/'+this.props.match.params.id)
       .then(res => {
-        // this.setState({...this.state, volunteer: res.data})
+        // this.setState({...this.state, user: res.data})
         this.setState({
           name: res.data.name,
-          age: res.data.age
+          password: res.data.password
         })
       })
       .catch(err => {
-        console.log("Error from UpdateVolunteerInfo");
+        console.log("Error from UpdateUser");
       })
   };
 
@@ -37,16 +37,16 @@ class UpdateVolunteerInfo extends Component {
 
     const data = {
       name: this.state.name,
-      age: this.state.age
+      password: this.state.password
     };
 
     axios
-      .put('http://localhost:8082/api/volunteers/'+this.props.match.params.id, data)
+      .put('http://localhost:8082/api/users/'+this.props.match.params.id, data)
       .then(res => {
-        this.props.history.push('/show-volunteer/'+this.props.match.params.id);
+        this.props.history.push('/show-user/'+this.props.match.params.id);
       })
       .catch(err => {
-        console.log("Error in UpdateVolunteerInfo!");
+        console.log("Error in UpdateUser!");
       })
   };
 
@@ -58,22 +58,18 @@ class UpdateVolunteerInfo extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <br />
-              <Link to="/volunteers" className="btn btn-outline-warning float-left">
-                  Show Volunteer List
+              <Link to="/users" className="btn btn-outline-warning float-left">
+                  Felhasználók listája
               </Link>
             </div>
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Edit</h1>
-              <p className="lead text-center">
-                  Update Volunteer's Info
-              </p>
+              <h1 className="display-4 text-center">Adatok módosítása</h1>
             </div>
           </div>
 
           <div className="col-md-8 m-auto">
           <form noValidate onSubmit={this.onSubmit}>
             <div className='form-group'>
-              <label htmlFor="name">Name</label>
               <input
                 type='text'
                 placeholder='name'
@@ -86,20 +82,17 @@ class UpdateVolunteerInfo extends Component {
             <br />
 
             <div className='form-group'>
-            <label htmlFor="age">Age</label>
               <input
-                type='number'
-                placeholder='Age'
-                name='age'
+                type='password'
+                placeholder='Password'
+                name='password'
                 className='form-control'
-                value={this.state.age}
+                value={this.state.password}
                 onChange={this.onChange}
               />
             </div>
 
-           
-
-            <button type="submit" className="btn btn-outline-info btn-lg btn-block">Update</button>
+            <button type="submit" className="btn btn-outline-info btn-lg btn-block">Módosítás</button>
             </form>
           </div>
 
@@ -109,4 +102,4 @@ class UpdateVolunteerInfo extends Component {
   }
 }
 
-export default UpdateVolunteerInfo;
+export default UpdateUser;

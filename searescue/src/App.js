@@ -1,36 +1,53 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 
-import CreateAnimal from './components/CreateAnimal';
-import ShowAnimalList from './components/ShowAnimalList';
-import ShowAnimalDetails from './components/ShowAnimalDetails';
-import UpdateAnimalInfo from './components/UpdateAnimalInfo';
+import CreateUser from './components/CreateUser';
+import ShowUserList from './components/ShowUserList';
+import ShowUserDetails from './components/ShowUserDetails';
+import UpdateUser from './components/UpdateUser';
 
-import CreateVolunteer from './components/CreateVolunteer';
-import ShowVolunteerList from './components/ShowVolunteerList';
-import ShowVolunteerDetails from './components/ShowVolunteerDetails';
-import UpdateVolunteerInfo from './components/UpdateVolunteerInfo';
+
 
 import Home from './components/Home';
+import AuthRouter from './components/AuthRouter';
+import CreateTodo from './components/CreateTodo';
+import ShowTodoDetails from './components/ShowTodoDetails';
+import UpdateTodo from './components/UpdateTodo';
+import Admin from './components/Admin'
+import ShowTodoList from './components/ShowTodoList';
+import Test from './components/Test';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isLoggedIn:false
+      
+    };
+  }
+
   render() {
     return (
       <Router>
-        <div>
-          <Route exact path='/animals' component={ShowAnimalList} />
-          <Route path='/create-animal' component={CreateAnimal} />
-          <Route path='/edit-animal/:id' component={UpdateAnimalInfo} />
-          <Route path='/show-animal/:id' component={ShowAnimalDetails} />
+        <Switch>
 
-	        <Route exact path='/volunteers' component={ShowVolunteerList} />
-          <Route path='/create-volunteer' component={CreateVolunteer} />
-          <Route path='/edit-volunteer/:id' component={UpdateVolunteerInfo} />
-          <Route path='/show-volunteer/:id' component={ShowVolunteerDetails} />
+          <AuthRouter parentClass={this} path='/users' component={ShowUserList} />
+          <AuthRouter parentClass={this} path='/create-user' component={CreateUser} />
+          <AuthRouter parentClass={this}Route path='/show-user/:id' component={ShowUserDetails} />
+          <AuthRouter parentClass={this} path='/show-user' component={ShowUserDetails} />
+          <AuthRouter parentClass={this} path='/edit-user/:id' component={UpdateUser} />
+          <AuthRouter path='/auth' parentClass={this} component={CreateTodo} />
+
+          <AuthRouter parentClass={this} path='/show-todo/:id' component={ShowTodoDetails} />
+          <AuthRouter parentClass={this} path='/edit-todo/:id' component={UpdateTodo} />
+          <AuthRouter parentClass={this} path='/admin' component={Admin} />
+          <AuthRouter parentClass={this} path='/todos' component={ShowTodoList}/>
+          <AuthRouter parentClass={this} path='/create-todo' component={CreateTodo}/>
+          <AuthRouter parentClass={this} path='/test' component={Test} />
 
           <Route path='/' component={Home}/>
-        </div>
+        </Switch>
       </Router>
     );
   }

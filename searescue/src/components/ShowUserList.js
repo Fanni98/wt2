@@ -2,40 +2,40 @@ import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import VolunteerCard from './VolunteerCard';
+import UserCard from './UserCard';
 
-class ShowVolunteerList extends Component {
+class ShowUserList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      volunteers: []
+      users: []
     };
   }
 
   componentDidMount() {
     axios
-      .get('http://localhost:8082/api/volunteers')
+      .get('http://localhost:8082/api/users')
       .then(res => {
         this.setState({
-          volunteers: res.data
+          users: res.data
         })
       })
       .catch(err =>{
-        console.log('Error from ShowVolunteerList');
+        console.log('Error from ShowUserList');
       })
   };
 
 
   render() {
-    const volunteers = this.state.volunteers;
-    console.log("PrintVolunteer: " + volunteers);
-    let volunteerList;
+    const users = this.state.users;
+    console.log("PrintUser: " + users);
+    let userList;
 
-    if(!volunteers) {
-      volunteerList = "there is no volunteer record!";
+    if(!users) {
+        userList = "there is no user record!";
     } else {
-      volunteerList = volunteers.map((volunteer, k) =>
-        <VolunteerCard volunteer={volunteer} key={k} />
+        userList = users.map((user, k) =>
+        <UserCard user={user} key={k} />
       );
     }
 
@@ -45,12 +45,12 @@ class ShowVolunteerList extends Component {
           <div className="row">
             <div className="col-md-12">
               <br />
-              <h2 className="display-4 text-center">Volunteers List</h2>
+              <h2 className="display-4 text-center">Felhasználók listája</h2>
             </div>
 
             <div className="col-md-11">
-              <Link to="/create-volunteer" className="btn btn-outline-warning float-right">
-                + Add New Volunteer
+              <Link to="/create-user" className="btn btn-outline-warning float-right">
+                +
               </Link>
               <br />
               <br />
@@ -58,9 +58,8 @@ class ShowVolunteerList extends Component {
             </div>
 
           </div>
-
           <div className="list">
-                {volunteerList}
+                {userList}
           </div>
         </div>
       </div>
@@ -68,4 +67,4 @@ class ShowVolunteerList extends Component {
   }
 }
 
-export default ShowVolunteerList;
+export default ShowUserList;

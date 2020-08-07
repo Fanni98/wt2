@@ -4,12 +4,14 @@ import '../App.css';
 import axios from 'axios';
 
 
-class CreateVolunteer extends Component {
+class CreateUser extends Component {
   constructor() {
     super();
     this.state = {
       name: '',
-      age:''
+      password: '',
+      token:''
+      
     };
   }
 
@@ -22,39 +24,38 @@ class CreateVolunteer extends Component {
 
     const data = {
       name: this.state.name,
-      age: this.state.age
+      password: this.state.password
     };
 
     axios
-      .post('http://localhost:8082/api/volunteers', data)
+      .post('http://localhost:8082/api/users', data)
       .then(res => {
         this.setState({
           name: '',
-          age:''
+          password:''
         })
         this.props.history.push('/');
       })
       .catch(err => {
-        console.log("Error in CreateVolunteer!");
+        console.log("Error in CreateUser!");
       })
   };
 
   render() {
+    const todo = this.state.todo;
     return (
       <div className="Create">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
               <br />
-              <Link to="/volunteers" className="btn btn-outline-warning float-left">
-                  Show Volunteer List
+              <Link to="/users" className="btn btn-outline-warning float-left">
+                  Felhasználók listája
               </Link>
             </div>
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Add Volunteer</h1>
-              <p className="lead text-center">
-                  Add new Volunteer
-              </p>
+              <h1 className="display-4 text-center">Regisztráció</h1>
+              
 
               <form noValidate onSubmit={this.onSubmit}>
                 <div className='form-group'>
@@ -67,21 +68,23 @@ class CreateVolunteer extends Component {
                     onChange={this.onChange}
                   />
                 </div>
-                <br />
 
                 <div className='form-group'>
                   <input
-                    type='number'
-                    placeholder='Age'
-                    name='age'
+                    type='password'
+                    placeholder='Password'
+                    name='password'
                     className='form-control'
-                    value={this.state.age}
+                    minLength='6'
+                    value={this.state.password}
                     onChange={this.onChange}
                   />
                 </div>
 
+
                 <input
                     type="submit"
+                    value="OK"
                     className="btn btn-outline-warning btn-block mt-4"
                 />
               </form>
@@ -93,4 +96,4 @@ class CreateVolunteer extends Component {
   }
 }
 
-export default CreateVolunteer;
+export default CreateUser;
