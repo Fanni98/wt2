@@ -4,6 +4,8 @@ import '../App.css';
 import axios from 'axios';
 import TodoCard from './TodoCard';
 import { CirclePicker } from 'react-color';
+import { connect } from 'react-redux';
+
 
 
   
@@ -46,14 +48,14 @@ class CreateTodo extends Component {
             expirationDate: this.state.expirationDate,
             background: this.state.background,
             order: this.state.order,
-            userId: this.state.userId
+            userId: this.props.user.data._id
+ 
             
         };
-
-    
+        
 
         axios
-            .post('http://localhost:8082/api/todos', data)
+            .post('http://localhost:8082/api/todos',  data)
             .then(res => {
                 this.setState({
                 title:'',
@@ -62,7 +64,7 @@ class CreateTodo extends Component {
                 expirationDate: '',
                 background:'',
                 order:'',
-                userId: data.user
+                userId: ''
                 })
                 this.getTodos()
             })
@@ -72,14 +74,16 @@ class CreateTodo extends Component {
     } 
     getTodos() {
         axios
-            .get('http://localhost:8082/api/todos')
+            .get('http://localhost:8082/api/todos/')
             .then(res => {
                 let todos = res.data.map((todo,todoIndex)=>{
                     return {...todo, order: todoIndex}
                 })
-                //console.log(res.data)
+                console.log(res.data)
+                
                 this.setState({
                     todos
+                    
                 })
             })
             .catch(err =>{
@@ -89,7 +93,10 @@ class CreateTodo extends Component {
   
     componentDidMount() {
         this.getTodos()
+        console.log(this.props.user.data)
+      
     }
+    
 
     onDragStart(event) {
         event
@@ -240,5 +247,6 @@ class CreateTodo extends Component {
         );
     }
 }
-
-export default CreateTodo;
+export default connect(store => ({
+    user: store.user
+  }))(CreateTodo)

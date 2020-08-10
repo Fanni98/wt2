@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
+import { connect } from 'react-redux';
 
 class UpdateTodo extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class UpdateTodo extends Component {
   }
 
   getTodos(){
+    console.log(this.state.user)
     axios
     .get('http://localhost:8082/api/todos/'+this.props.match.params.id)
     .then(res => {
@@ -23,7 +25,7 @@ class UpdateTodo extends Component {
         title: res.data.title,
         task: res.data.task,
         date: res.data.date,
-        expirationDate: res.date.expirationDate
+        expirationDate: res.data.expirationDate
       })
     })
     .catch(err => {
@@ -33,6 +35,7 @@ class UpdateTodo extends Component {
 
   componentDidMount() {
    this.getTodos()
+   console.log(this.props.user.data)
   };
 
   onChange = e => {
@@ -123,4 +126,6 @@ class UpdateTodo extends Component {
   }
 }
 
-export default UpdateTodo;
+export default connect(store => ({
+  user: store.user
+}))(UpdateTodo)

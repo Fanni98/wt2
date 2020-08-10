@@ -20,7 +20,7 @@ class PreLoad extends Component {
         .then(res => {
             this.props.dispatch(LoginUser(res.data))
 
-            this.props.dispatch(AddTodo(res.data))
+            //this.props.dispatch(AddTodo(res.data))
 
             setTimeout(() => {
                 this.props.parentClass.setState({isLoggedIn: true})
