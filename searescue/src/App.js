@@ -7,8 +7,6 @@ import ShowUserList from './components/ShowUserList';
 import ShowUserDetails from './components/ShowUserDetails';
 import UpdateUser from './components/UpdateUser';
 
-
-
 import Home from './components/Home';
 import AuthRouter from './components/AuthRouter';
 import CreateTodo from './components/CreateTodo';

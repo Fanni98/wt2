@@ -7,7 +7,7 @@ const UserCard = (props) => {
     const user = props.user;
 
     return(
-        <div className="card-container">
+        <div className="card-container1">
             <img src={sea} alt="" />
             <div className="desc">
                 <h2>
@@ -15,10 +15,7 @@ const UserCard = (props) => {
                         { user.name }
                     </Link>
                 </h2>
-                <h3>{user.age}</h3>
-                <p>{user.type}</p>
-                <p>{user.rescue_date}</p>
-		        <p>{user.description}</p>
+
             </div>
         </div>
     )

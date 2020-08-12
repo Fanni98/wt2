@@ -9,7 +9,8 @@ class Home extends Component {
     super();
     this.state = {
       name: '',
-      password: '',
+      password: ''
+     
       
     };
   }
@@ -41,6 +42,8 @@ class Home extends Component {
       .catch(err => {
         console.log("Error in CreateUser!");
       })
+
+      
   };
 
   render() {

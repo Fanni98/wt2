@@ -6,8 +6,6 @@ import TodoCard from './TodoCard';
 import { CirclePicker } from 'react-color';
 import { connect } from 'react-redux';
 
-
-
   
 class CreateTodo extends Component {
   constructor(props) {
@@ -33,6 +31,7 @@ class CreateTodo extends Component {
   handleChangeComplete = (color) => {
     this.setState({ background: color.hex });
   };
+
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -71,10 +70,34 @@ class CreateTodo extends Component {
             .catch(err => {
                 console.log("Error in CreateTodo!");
             })
+
+       
+            
     } 
-    getTodos() {
+    logOut(){
         axios
-            .get('http://localhost:8082/api/todos/')
+        .get('http://localhost:8082/api/users/logout')
+        .then(res => {
+          this.setState({
+           isLoggedIn: false
+          })
+          this.props.history.push('/');
+  
+          
+        })
+        .catch(err => {
+          console.log("Error in logout!");
+        })
+
+
+    }
+    getTodos() {
+        let url = 'http://localhost:8082/api/todos/user/'
+        if(this.props.user.data._id != undefined)  {
+            url += this.props.user.data._id
+        }
+        axios
+            .get(url)
             .then(res => {
                 let todos = res.data.map((todo,todoIndex)=>{
                     return {...todo, order: todoIndex}
@@ -90,6 +113,7 @@ class CreateTodo extends Component {
                 console.log('Error from ShowTodoList');
             })
     }
+    
   
     componentDidMount() {
         this.getTodos()
@@ -164,9 +188,7 @@ class CreateTodo extends Component {
                                 Profilom
                             </Link>
                             <br />
-                            <Link to={`/`} className="btn btn-outline-info btn-lg btn-block">
-                                Kijelentkezés
-                            </Link>
+                            <button type="button" className="btn btn-outline-danger btn-lg btn-block" onClick={this.logOut}>Kijelentkezés</button>                         
                             <br />
                         </div>
                     </div>

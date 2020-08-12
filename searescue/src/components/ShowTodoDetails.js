@@ -14,7 +14,7 @@ class showTodoDetails extends Component {
   componentDidMount() {
     // console.log("Print id: " + this.props.match.params.id);
     axios
-      .get('http://localhost:8082/api/todos/'+this.props.match.params.id)
+      .get('http://localhost:8082/api/todos/'+ this.props.match.params.id)
       .then(res => {
         // console.log("Print-showTodoDetails-API-response: " + res.data);
         this.setState({
@@ -26,9 +26,9 @@ class showTodoDetails extends Component {
       })
   };
 
-  onDeleteClick (id) {
+  onDeleteClick () {
     axios
-      .delete('http://localhost:8082/api/todos/'+id)
+      .delete('http://localhost:8082/api/todos/'+ this.props.match.params.id)
       .then(res => {
         this.props.history.push("/auth");
       })

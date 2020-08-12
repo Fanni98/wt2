@@ -77,6 +77,16 @@
   overflow: hidden;
 }
 
+.card-container1 {
+  width: 250px;
+  height: 300px;
+  border: 1px solid rgba(0,0,.125);
+  margin: 0 auto;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+
 .desc {
   height: 130px;
   padding: 10px;

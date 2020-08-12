@@ -29,7 +29,7 @@ router.post("/login", (req, res) => {
     });
   });
 
-  router.post("/token", (req, res) => {
+router.post("/token", (req, res) => {
   
   User.findOne({ token: req.body.token }).then(user => {
       if (!user) {
@@ -76,6 +76,12 @@ router.get('/', (req, res) => {
     .then(users => res.json(users))
     .catch(err => res.status(404).json({ nouserfound: 'users found' }));
 });
+
+
+router.get('/logout',(req,res)=>{
+  
+  
+})
 
 
 router.get('/:id', (req, res) => {
