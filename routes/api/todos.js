@@ -8,7 +8,7 @@ router.get('/test', (req, res) => res.send('todo route testing!'));
 
 
 router.get('/', (req, res) => {
-    Todo.find()
+    Todo.find().sort({userName: 1})
     .then(todos => res.json(todos))
     .catch(err => res.status(404).json({ notodosfound: 'No Todos found' }));
 });

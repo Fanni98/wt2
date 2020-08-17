@@ -27,6 +27,10 @@ const TodoSchema = new mongoose.Schema({
   userId: {
     type: String
   }
+  ,
+  userName: {
+    type: String
+  }
 });
 
 module.exports = Todo = mongoose.model('todo', TodoSchema);

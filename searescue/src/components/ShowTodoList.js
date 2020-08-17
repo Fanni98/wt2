@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import TodoCard from './TodoCard';
+import TodoCardAdmin from './TodoCardAdmin';
+import { connect } from 'react-redux';
 
 
 
@@ -21,8 +22,12 @@ class ShowTodoList extends Component {
       .get('http://localhost:8082/api/todos')
       .then(res => {
         this.setState({
-          todos: res.data
+          todos: res.data,
+          
+         
         })
+        console.log(res.data)
+        
       })
       .catch(err =>{
         console.log('Error from ShowTodoList');
@@ -33,14 +38,13 @@ class ShowTodoList extends Component {
 
   render() {
     const todos = this.state.todos;
-    console.log("PrintTodo: " + todos);
     let todoList;
 
     if(!todos) {
         todoList = "there is no todo record!";
     } else {
         todoList = todos.map((todo, k) =>
-        <TodoCard todo={todo} key={k} />
+        <TodoCardAdmin todo={todo} key={k} />
       );
     }
 
@@ -63,13 +67,21 @@ class ShowTodoList extends Component {
             </div>
 
           </div>
-          <div className="list">
-                {todoList}
-          </div>
+          <div className="ShowList">
+                <div className="container">
+                  <div className="list">
+                        {todoList}
+                  </div>
+                </div>
+              </div>
+
         </div>
       </div>
     );
   }
 }
 
-export default ShowTodoList;
+export default connect(store => ({
+  user: store.user
+}))(ShowTodoList)
+

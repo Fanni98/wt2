@@ -21,6 +21,7 @@ class CreateTodo extends Component {
         background:'',
         order:'',
         userId:'',
+        userName: '',
        
         
         hoverItemId: null,
@@ -47,7 +48,8 @@ class CreateTodo extends Component {
             expirationDate: this.state.expirationDate,
             background: this.state.background,
             order: this.state.order,
-            userId: this.props.user.data._id
+            userId: this.props.user.data._id,
+            userName:this.props.user.data.name
  
             
         };
@@ -63,7 +65,8 @@ class CreateTodo extends Component {
                 expirationDate: '',
                 background:'',
                 order:'',
-                userId: ''
+                userId: '',
+                userName: ''
                 })
                 this.getTodos()
             })
