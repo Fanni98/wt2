@@ -11,6 +11,7 @@ const User = require('../../models/User');
 
 
 router.get('/test', (req, res) => res.send('user route testing!'));
+
 router.post("/login", (req, res) => {
     // Form validation
   const { errors, isValid } = validateLoginInput(req.body);
@@ -18,7 +19,25 @@ router.post("/login", (req, res) => {
     if (!isValid) {
       return res.status(400).json(errors);
     }
-  User.findOne({ name: req.body.name }).then(user => {
+  User.findOne({ name: req.body.name}).then(user => {
+      if (!user) {
+        return res.status(400).json({ name: "name dont exists" });
+      } else {
+            user.token =  Math.random().toString(36).substring(7);
+            user.save()
+            return res.json(user)
+      }
+    });
+  });
+
+  router.post("/loginadmin", (req, res) => {
+    // Form validation
+  const { errors, isValid } = validateLoginInput(req.body);
+  // Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+  User.findOne({ name: req.body.name}).then(user => {
       if (!user) {
         return res.status(400).json({ name: "name dont exists" });
       } else {
@@ -51,7 +70,7 @@ router.post("/register", (req, res) => {
       if (user) {
         return res.status(400).json({ name: "name already exists" });
       } else {
-        const newUser = new User({
+          const newUser = new User({
           name: req.body.name,
           password: req.body.password
         });
@@ -79,10 +98,20 @@ router.get('/', (req, res) => {
 
 
 router.get('/logout',(req,res)=>{
-  
+  User.findOne({ name: req.params.name }).then(user => {
+    if (!user) {
+      return res.status(400).json({ name: "name dont exists" });
+    } else {
+          localStorage.removeItem('user')
+    }
+  });
   
 })
-
+router.post('/', (req, res) => {
+  User.create(req.body)
+    .then(user => res.json({ msg: 'User added successfully' }))
+    .catch(err => res.status(400).json({ error: 'Unable to add this user' }));
+}); 
 
 router.get('/:id', (req, res) => {
   User.findById(req.params.id)
@@ -91,11 +120,7 @@ router.get('/:id', (req, res) => {
 });
 
 
-router.post('/', (req, res) => {
-  User.create(req.body)
-    .then(user => res.json({ msg: 'User added successfully' }))
-    .catch(err => res.status(400).json({ error: 'Unable to add this user' }));
-});
+
 
 
 router.put('/:id', (req, res) => {

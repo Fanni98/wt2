@@ -77,23 +77,9 @@ class CreateTodo extends Component {
        
             
     } 
-    logOut(){
-        axios
-        .get('http://localhost:8082/api/users/logout')
-        .then(res => {
-          this.setState({
-           isLoggedIn: false
-          })
-          this.props.history.push('/');
-  
-          
-        })
-        .catch(err => {
-          console.log("Error in logout!");
-        })
+    
 
-
-    }
+    
     getTodos() {
         let url = 'http://localhost:8082/api/todos/user/'
         if(this.props.user.data._id != undefined)  {
@@ -191,7 +177,9 @@ class CreateTodo extends Component {
                                 Profilom
                             </Link>
                             <br />
-                            <button type="button" className="btn btn-outline-danger btn-lg btn-block" onClick={this.logOut}>Kijelentkezés</button>                         
+                            <Link to={`/logout`} className="btn btn-outline-danger btn-lg btn-block">
+                                Kijelentkezés
+                            </Link>                         
                             <br />
                         </div>
                     </div>
@@ -266,9 +254,7 @@ class CreateTodo extends Component {
                 </div>
             </div>
         </div>
-
-            
-            
+        
         );
     }
 }

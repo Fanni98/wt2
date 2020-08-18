@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {LoginUser} from '../adapters/user/actions'
-import {AddTodo} from '../adapters/todo/actions'
 import axios from 'axios';
 
 class PreLoad extends Component {
@@ -39,6 +38,5 @@ class PreLoad extends Component {
     }
 }
 export default connect(store => ({
-    user: store.user,
-    todo: store.todo
+    user: store.user
 }))(PreLoad)

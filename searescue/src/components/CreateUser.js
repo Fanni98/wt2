@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
 
@@ -28,7 +27,7 @@ class CreateUser extends Component {
     };
 
     axios
-      .post('http://localhost:8082/api/users', data)
+      .post('http://localhost:8082/api/users/register', data)
       .then(res => {
         this.setState({
           name: '',
@@ -44,35 +43,30 @@ class CreateUser extends Component {
   render() {
     const todo = this.state.todo;
     return (
-      <div className="Create">
+      <div className="App-header">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <br />
-              <Link to="/users" className="btn btn-outline-warning float-left">
-                  Felhasználók listája
-              </Link>
-            </div>
-            <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Regisztráció</h1>
-              
+              <br />              
 
               <form noValidate onSubmit={this.onSubmit}>
                 <div className='form-group'>
                   <input
                     type='text'
-                    placeholder='Name'
+                    placeholder='Felhasználónév'
                     name='name'
                     className='form-control'
                     value={this.state.name}
                     onChange={this.onChange}
                   />
                 </div>
+                <hr />
 
                 <div className='form-group'>
                   <input
                     type='password'
-                    placeholder='Password'
+                    placeholder='Jelszó'
                     name='password'
                     className='form-control'
                     minLength='6'
@@ -80,6 +74,7 @@ class CreateUser extends Component {
                     onChange={this.onChange}
                   />
                 </div>
+                <hr />
 
 
                 <input

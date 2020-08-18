@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 
 class Home extends Component {
@@ -9,7 +10,8 @@ class Home extends Component {
     super();
     this.state = {
       name: '',
-      password: ''
+      password: '',
+      
      
       
     };
@@ -43,10 +45,13 @@ class Home extends Component {
         console.log("Error in CreateUser!");
       })
 
+    
+
       
   };
 
   render() {
+    
     return (
       <div className="App-header">
         <div className="container">
@@ -54,47 +59,49 @@ class Home extends Component {
             
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Hello</h1>
-              
+              <br />
 
               <form noValidate onSubmit={this.onSubmit}>
                 <div className='form-group'>
                   <input
                     type='text'
-                    placeholder='Name'
+                    placeholder='Felhasználónév'
                     name='name'
                     className='form-control'
                     value={this.state.name}
                     onChange={this.onChange}
                   />
                 </div>
+                <hr />
 
                 <div className='form-group'>
                   <input
                     type='password'
-                    placeholder='Password'
+                    placeholder='Jelszó'
                     name='password'
                     className='form-control'
                     value={this.state.password}
                     onChange={this.onChange}
                   />
                 </div>
+                <hr />
 
                 <input
                     type="submit" value="Bejelentkezem"
                     className="btn btn-outline-warning btn-block mt-4"
                 />
-                <br />
-              <Link to="/create-user" className="btn btn-outline-warning float-left">
+                <hr />
+              <Link to="/create-user" className="btn btn-outline-warning btn-block mt-4">
                   Regisztrálok
               </Link>
               <br />
-              <Link to="/admin" className="btn btn-outline-warning float-left">
+              <br />
+              <hr />
+              <Link to={"/ladmin"} className="btn btn-outline-warning float-right">
                   Admin
               </Link>
               </form>
-              <div className="col-md-8 m-auto">
               
-            </div>
           </div>
           </div>
         </div>
@@ -102,5 +109,7 @@ class Home extends Component {
     );
   }
 }
+export default connect(store => ({
+  user: store.user
+}))(Home)
 
-export default Home;
