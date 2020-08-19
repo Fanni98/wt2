@@ -37,12 +37,14 @@ class Home extends Component {
           password:'',
           token:''
         })
-        this.props.history.push('/auth');
 
         localStorage.token=res.data.token
+        setTimeout(() => {
+          this.props.history.push('/auth');
+        }, 100);
       })
       .catch(err => {
-        console.log("Error in CreateUser!");
+        console.log("Error in Login!");
       })
 
     
@@ -97,9 +99,6 @@ class Home extends Component {
               <br />
               <br />
               <hr />
-              <Link to={"/ladmin"} className="btn btn-outline-warning float-right">
-                  Admin
-              </Link>
               </form>
               
           </div>

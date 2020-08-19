@@ -4,3 +4,8 @@ export function LoginUser(payload = {}) {
         payload
     }
 }
+export function SetDefaultUserData() {
+    return {
+        type: 'SET_DEFAULT_USER_DATA',
+    }
+}

@@ -14,13 +14,15 @@ class PreLoad extends Component {
     const data = {
         token: localStorage.token
     }
+    console.log('aaaaaaaa')
     axios
         .post('http://localhost:8082/api/users/token', data)
         .then(res => {
             this.props.dispatch(LoginUser(res.data))
-
+            console.log("Itt%");
             setTimeout(() => {
                 this.props.parentClass.setState({isLoggedIn: true})
+                console.log("passed!");
             }, 250);
         })
         .catch(err => {

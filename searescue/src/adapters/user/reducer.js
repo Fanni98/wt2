@@ -7,6 +7,9 @@ export default (state = defaultStore, action) => {
             console.log('action',action)
             return { ... state, data: action.payload}
         }
+        case 'SET_DEFAULT_USER_DATA': {
+            return {... state, data: null}
+        }
         default: return {...state}
     }
 }

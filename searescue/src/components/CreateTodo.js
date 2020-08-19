@@ -5,6 +5,8 @@ import axios from 'axios';
 import TodoCard from './TodoCard';
 import { CirclePicker } from 'react-color';
 import { connect } from 'react-redux';
+import ShowTodoList from './ShowTodoList';
+import Admin from './Admin';
 
   
 class CreateTodo extends Component {
@@ -22,6 +24,7 @@ class CreateTodo extends Component {
         order:'',
         userId:'',
         userName: '',
+        admin: '',
        
         
         hoverItemId: null,
@@ -49,7 +52,8 @@ class CreateTodo extends Component {
             background: this.state.background,
             order: this.state.order,
             userId: this.props.user.data._id,
-            userName:this.props.user.data.name
+            userName:this.props.user.data.name,
+            admin:this.props.user.data.admin
  
             
         };
@@ -66,7 +70,8 @@ class CreateTodo extends Component {
                 background:'',
                 order:'',
                 userId: '',
-                userName: ''
+                userName: '',
+                admin:''
                 })
                 this.getTodos()
             })
@@ -77,12 +82,10 @@ class CreateTodo extends Component {
        
             
     } 
-    
 
-    
     getTodos() {
         let url = 'http://localhost:8082/api/todos/user/'
-        if(this.props.user.data._id != undefined)  {
+        if(this.props.user.data != null && this.props.user.data._id != undefined)  {
             url += this.props.user.data._id
         }
         axios
@@ -149,10 +152,15 @@ class CreateTodo extends Component {
     render() {
         const todos = this.state.todos;
         const user = this.state.user;
+
+        const isAdmin= this.props.user.data.admin;
+        if (isAdmin == true){
+            return <Admin />
+        }
         
         let todoList;
 
-        if(!todos) {
+        if(todos.length == 0) {
             todoList = "there is no todo record!";
         } else {
             //todos.sort((a, b) => (a.order > b.order) ? 1 : -1)
@@ -167,7 +175,9 @@ class CreateTodo extends Component {
         }
 
         return (
+        
         <div className="Create">
+            
             <div className="container">
                 <div className="row">
                     <div className="col-md-8 m-auto">
@@ -177,9 +187,10 @@ class CreateTodo extends Component {
                                 Profilom
                             </Link>
                             <br />
-                            <Link to={`/logout`} className="btn btn-outline-danger btn-lg btn-block">
+                            <Link to="/logout" className="btn btn-outline-danger btn-lg btn-block">
                                 Kijelentkezés
                             </Link>                         
+              
                             <br />
                         </div>
                     </div>

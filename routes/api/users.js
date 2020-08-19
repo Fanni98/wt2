@@ -12,41 +12,6 @@ const User = require('../../models/User');
 
 router.get('/test', (req, res) => res.send('user route testing!'));
 
-router.post("/login", (req, res) => {
-    // Form validation
-  const { errors, isValid } = validateLoginInput(req.body);
-  // Check validation
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
-  User.findOne({ name: req.body.name}).then(user => {
-      if (!user) {
-        return res.status(400).json({ name: "name dont exists" });
-      } else {
-            user.token =  Math.random().toString(36).substring(7);
-            user.save()
-            return res.json(user)
-      }
-    });
-  });
-
-  router.post("/loginadmin", (req, res) => {
-    // Form validation
-  const { errors, isValid } = validateLoginInput(req.body);
-  // Check validation
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
-  User.findOne({ name: req.body.name}).then(user => {
-      if (!user) {
-        return res.status(400).json({ name: "name dont exists" });
-      } else {
-            user.token =  Math.random().toString(36).substring(7);
-            user.save()
-            return res.json(user)
-      }
-    });
-  });
 
 router.post("/token", (req, res) => {
   
@@ -89,6 +54,26 @@ router.post("/register", (req, res) => {
     });
   });
 
+router.post("/login", (req, res) => {
+    // Form validation
+  const { errors, isValid } = validateLoginInput(req.body);
+  // Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+  
+  User.findOne({ name: req.body.name}).then(user => {
+
+      if (!user ) {
+        return res.status(400).json({ name: "name dont exists" });
+      } else {
+            user.token =  Math.random().toString(36).substring(7);
+            user.save()
+            return res.json(user)
+      }
+    });
+  });
+
 
 router.get('/', (req, res) => {
   User.find()
@@ -97,16 +82,6 @@ router.get('/', (req, res) => {
 });
 
 
-router.get('/logout',(req,res)=>{
-  User.findOne({ name: req.params.name }).then(user => {
-    if (!user) {
-      return res.status(400).json({ name: "name dont exists" });
-    } else {
-          localStorage.removeItem('user')
-    }
-  });
-  
-})
 router.post('/', (req, res) => {
   User.create(req.body)
     .then(user => res.json({ msg: 'User added successfully' }))
@@ -118,9 +93,6 @@ router.get('/:id', (req, res) => {
     .then(user => res.json(user))
     .catch(err => res.status(404).json({ nouserfound: 'No User found' }));
 });
-
-
-
 
 
 router.put('/:id', (req, res) => {

@@ -16,7 +16,7 @@ class showUserDetails extends Component {
   componentDidMount() {
     console.log(this.props.user.data)
     if(this.props.match.params.id == 'undefined' || this.props.match.params.id == undefined) {
-      console.log('user nincs...')
+      //console.log('user nincs...')
       console.log(this.props.user.data)
       console.log(this.props.todo)
       this.setState({user: this.props.user.data, todo: this.props.data})

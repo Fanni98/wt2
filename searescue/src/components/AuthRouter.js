@@ -7,13 +7,13 @@ const AuthRouter = ({ component: Component, parentClass: parentClass, ...rest })
     <Route {...rest} render={props => (
         (localStorage.token != undefined && localStorage.token != '') ? (
             parentClass.state.isLoggedIn == true ? (
-                <Component {...props} />
+                <Component {...props} parentClass={parentClass} />
             ) : (
                 <PreLoad parentClass={parentClass} />
             )
         ) : (
-            console.log('hiba')
-           // window.location.href = '/'
+            //console.log('hiba')
+            window.location.href = '/'
         )
     )} />
 )

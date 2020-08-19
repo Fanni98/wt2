@@ -12,6 +12,10 @@ const UserSchema = new mongoose.Schema({
   token: {
     type : String,
     default: ''
+  },
+  admin: {
+    type : Boolean,
+    default: false
   }
 });
 

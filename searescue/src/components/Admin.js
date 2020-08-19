@@ -15,8 +15,10 @@ function Admin() {
               <Link to="/todos" className="btn btn-outline-warning float-left">
                 Feladatok
               </Link>
-              <br />
-              <br />
+              <Link to="/logout" className="btn btn-outline-danger btn-lg float-right">
+                Kijelentkezés
+              </Link>                         
+              
             </div>
     
             
