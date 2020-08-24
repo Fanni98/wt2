@@ -55,24 +55,36 @@ router.post("/register", (req, res) => {
   });
 
 router.post("/login", (req, res) => {
-    // Form validation
+
+  // Form validation
   const { errors, isValid } = validateLoginInput(req.body);
   // Check validation
     if (!isValid) {
       return res.status(400).json(errors);
     }
-  
+  const currentPassword= req.body.password
   User.findOne({ name: req.body.name}).then(user => {
-
-      if (!user ) {
-        return res.status(400).json({ name: "name dont exists" });
+    
+    bcrypt.compare(currentPassword, user.password, function(err, isMatch) {
+      if (err) {
+        throw err
+      } else if (!isMatch) {
+        console.log("Password doesn't match!")
       } else {
+        if (!user) {
+          return res.status(400).json({ name: "name dont exists" });
+        } else {
             user.token =  Math.random().toString(36).substring(7);
             user.save()
             return res.json(user)
+            
+        }
       }
     });
-  });
+
+    });
+    
+});
 
 
 router.get('/', (req, res) => {
