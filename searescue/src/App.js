@@ -15,6 +15,7 @@ import UpdateTodo from './components/UpdateTodo';
 import ShowTodoList from './components/ShowTodoList';
 import Test from './components/Test';
 import Logout from './components/Logout';
+import CreateTodoAdmin from './components/CreateTodoAdmin';
 
 class App extends Component {
   constructor() {
@@ -32,6 +33,7 @@ class App extends Component {
 
           <AuthRouter parentClass={this} path='/users' component={ShowUserList} />
           <AuthRouter parentClass={this} path='/create-user' component={CreateUser} />
+          <AuthRouter parentClass={this} path='/create' component={CreateTodoAdmin} />
           <AuthRouter parentClass={this}Route path='/show-user/:id' component={ShowUserDetails} />
           <AuthRouter parentClass={this} path='/show-user' component={ShowUserDetails} />
           <AuthRouter parentClass={this} path='/edit-user/:id' component={UpdateUser} />

@@ -11,7 +11,10 @@ class ShowTodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: []
+      todos: [],
+         
+      hoverItemId: null,
+      grabedItemId: null
     };
   }
 
@@ -34,6 +37,40 @@ class ShowTodoList extends Component {
       })
   };
   
+  onDragStart(event) {
+    event
+        .dataTransfer
+        .setData('text/plain', event.target.id);
+    this.setState({
+        grabedItemId: event.target.id
+    })
+    event
+        .currentTarget
+        .style
+        .backgroundColor = 'yellow';
+    //console.log('onDragStart',event.target.id)
+}
+
+onDragOver(event) {
+    if(event.target.id == '' || event.target.id == this.state.grabedItemId || this.state.grabedItemId == null ) return false
+    this.setState({hoverItemId: event.target.id})
+    event.preventDefault();
+}
+
+onDrop(event) {
+    let tmpTodos = []
+    this.state.todos.forEach(item=>{
+        if(item._id != this.state.grabedItemId) {
+            if(item._id == this.state.hoverItemId) {
+                let selectedTodoItem = this.state.todos.find(todo =>{ return todo._id == this.state.grabedItemId}) 
+                tmpTodos.push(selectedTodoItem)
+            }
+            tmpTodos.push(item)
+        }
+    })
+    this.setState({todos: tmpTodos})
+}
+
 
 
   render() {
@@ -44,7 +81,9 @@ class ShowTodoList extends Component {
         todoList = "there is no todo record!";
     } else {
         todoList = todos.map((todo, k) =>
-        <TodoCardAdmin todo={todo} key={k} />
+        <TodoCardAdmin todo={todo} key={k}  
+        onDragStart={this.onDragStart.bind(this)}
+        onDragOver={this.onDragOver.bind(this)}/>
       );
     }
 
@@ -58,7 +97,7 @@ class ShowTodoList extends Component {
             </div>
 
             <div className="col-md-11">
-              <Link to="/create-todo" className="btn btn-outline-warning float-right">
+              <Link to="/create" className="btn btn-outline-warning float-right">
                 +
               </Link>
               <br />
@@ -69,7 +108,7 @@ class ShowTodoList extends Component {
           </div>
           <div className="ShowList">
                 <div className="container">
-                  <div className="list">
+                  <div className="list" onDrop={this.onDrop.bind(this)}>
                         {todoList}
                   </div>
                 </div>

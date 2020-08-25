@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
-import TodoCard from './TodoCard';
 import { CirclePicker } from 'react-color';
 import { connect } from 'react-redux';
-import Admin from './Admin';
+
 
   
 class CreateTodo extends Component {
@@ -22,12 +21,7 @@ class CreateTodo extends Component {
         background:'',
         order:'',
         userId:'',
-        userName: '',
-        admin: '',
-       
-        
-        hoverItemId: null,
-        grabedItemId: null
+        userName: ''
       
     };
   }
@@ -50,9 +44,8 @@ class CreateTodo extends Component {
             expirationDate: this.state.expirationDate,
             background: this.state.background,
             order: this.state.order,
-            userId: this.props.user.data._id,
-            userName:this.props.user.data.name,
-            admin:this.props.user.data.admin
+            userId: this.state.userId,
+            userName:this.state.userName
  
             
         };
@@ -69,10 +62,11 @@ class CreateTodo extends Component {
                 background:'',
                 order:'',
                 userId: '',
-                userName: '',
-                admin:''
+                userName: ''
                 })
-                this.getTodos()
+
+                this.props.history.push('/todos');
+                
             })
             .catch(err => {
                 console.log("Error in CreateTodo!");
@@ -81,120 +75,28 @@ class CreateTodo extends Component {
        
             
     } 
-
-    getTodos() {
-        let url = 'http://localhost:8082/api/todos/user/'
-        if(this.props.user.data != null && this.props.user.data._id != undefined)  {
-            url += this.props.user.data._id
-        }
-        axios
-            .get(url)
-            .then(res => {
-                let todos = res.data.map((todo,todoIndex)=>{
-                    return {...todo, order: todoIndex}
-                })
-                console.log(res.data)
-                
-                this.setState({
-                    todos
-                    
-                })
-            })
-            .catch(err =>{
-                console.log('Error from ShowTodoList');
-            })
-    }
     
   
     componentDidMount() {
-        this.getTodos()
         console.log(this.props.user.data)
       
     }
-    
-
-    onDragStart(event) {
-        event
-            .dataTransfer
-            .setData('text/plain', event.target.id);
-        this.setState({
-            grabedItemId: event.target.id
-        })
-        event
-            .currentTarget
-            .style
-            .backgroundColor = 'yellow';
-        //console.log('onDragStart',event.target.id)
-    }
-
-    onDragOver(event) {
-        if(event.target.id == '' || event.target.id == this.state.grabedItemId || this.state.grabedItemId == null ) return false
-        this.setState({hoverItemId: event.target.id})
-        event.preventDefault();
-    }
-
-    onDrop(event) {
-        let tmpTodos = []
-        this.state.todos.forEach(item=>{
-            if(item._id != this.state.grabedItemId) {
-                if(item._id == this.state.hoverItemId) {
-                    let selectedTodoItem = this.state.todos.find(todo =>{ return todo._id == this.state.grabedItemId}) 
-                    tmpTodos.push(selectedTodoItem)
-                }
-                tmpTodos.push(item)
-            }
-        })
-        this.setState({todos: tmpTodos})
-    }
+   
 
  
     render() {
-        const todos = this.state.todos;
-        const user = this.state.user;
-
-        const isAdmin= this.props.user.data.admin;
-        if (isAdmin == true){
-            return <Admin />
-        }
-        
-        let todoList;
-
-        if(todos.length == 0) {
-            todoList = "there is no todo record!";
-        } else {
-            //todos.sort((a, b) => (a.order > b.order) ? 1 : -1)
-            todoList = todos.map((todo, k) =>
-            <TodoCard 
-                todo={todo}
-                key={k}
-                onDragStart={this.onDragStart.bind(this)}
-                onDragOver={this.onDragOver.bind(this)}
-            />
-        );
-        }
+        const users = this.state.users;
 
         return (
+            
         
-        <div className="Create">
+        <div className="App-header">
             
             <div className="container">
                 <div className="row">
+                    
                     <div className="col-md-8 m-auto">
-                    <br />
-                        <div className="col-md-6">
-                            <Link to={`/show-user/${user._id}`} className="btn btn-outline-info btn-lg btn-block">
-                                Profilom
-                            </Link>
-                            <br />
-                            <Link to="/logout" className="btn btn-outline-danger btn-lg btn-block">
-                                Kijelentkezés
-                            </Link>                         
-              
-                            <br />
-                        </div>
-                    </div>
-                    <div className="col-md-8 m-auto">
-                    <h1 className="display-4 text-center">Feladatok</h1>
+                    <h1 className="display-4 text-center">Feladat hozzáadás</h1>
                     <br />
 
                     <form noValidate onSubmit={this.onSubmit}>
@@ -242,8 +144,19 @@ class CreateTodo extends Component {
                             name= 'background'
                             
                         />
+                        <hr />
+                         <input
+                            type='text'
+                            name='felhasználó'
+                            placeholder='Felhasználó'
+                            className='form-control'
+                            value={this.state.userName}
+                            onChange={this.onChange}
+                        />
                         
                         </div>
+                        
+                        
                         <hr />
                         <input
                             type="submit"
@@ -255,13 +168,7 @@ class CreateTodo extends Component {
             </div>
             <br />
             </div>
-            <div className="ShowList">
-                <div className="container">
-                    <div className="list" onDrop={this.onDrop.bind(this)} >
-                        {todoList}
-                    </div> 
-                </div>
-            </div>
+            
         </div>
         
         );
