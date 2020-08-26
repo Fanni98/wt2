@@ -5,6 +5,7 @@ import axios from 'axios';
 import { CirclePicker } from 'react-color';
 import { connect } from 'react-redux';
 
+import SelectCustom from './SelectCustom'
 
   
 class CreateTodo extends Component {
@@ -20,16 +21,15 @@ class CreateTodo extends Component {
         user:{},
         background:'',
         order:'',
-        userId:'',
-        userName: ''
+        selectedUser: {},
+        users: []
       
     };
   }
   handleChangeComplete = (color) => {
     this.setState({ background: color.hex });
   };
-
-
+  
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -44,8 +44,8 @@ class CreateTodo extends Component {
             expirationDate: this.state.expirationDate,
             background: this.state.background,
             order: this.state.order,
-            userId: this.state.userId,
-            userName:this.state.userName
+            userId: this.state.selectedUser._id,
+            userName:this.state.selectedUser.name
  
             
         };
@@ -61,8 +61,7 @@ class CreateTodo extends Component {
                 expirationDate: '',
                 background:'',
                 order:'',
-                userId: '',
-                userName: ''
+                selectedUser: {},
                 })
 
                 this.props.history.push('/todos');
@@ -71,21 +70,28 @@ class CreateTodo extends Component {
             .catch(err => {
                 console.log("Error in CreateTodo!");
             })
-
-       
             
     } 
     
   
     componentDidMount() {
         console.log(this.props.user.data)
-      
+        axios
+            .get('http://localhost:8082/api/users')
+            .then(res => {
+                this.setState({
+                    users: res.data
+                })
+            })
+            .catch(err =>{
+                console.log('Error from ShowUserList');
+             })
     }
-   
 
  
     render() {
         const users = this.state.users;
+       
 
         return (
             
@@ -144,19 +150,12 @@ class CreateTodo extends Component {
                             name= 'background'
                             
                         />
-                        <hr />
-                         <input
-                            type='text'
-                            name='felhasználó'
-                            placeholder='Felhasználó'
-                            className='form-control'
-                            value={this.state.userName}
-                            onChange={this.onChange}
-                        />
-                        
+                       <hr />
+                       <SelectCustom list={users}
+                            value={this.state.selectedUser}
+                            onChange={this.onChange}/>
                         </div>
-                        
-                        
+ 
                         <hr />
                         <input
                             type="submit"
@@ -168,6 +167,7 @@ class CreateTodo extends Component {
             </div>
             <br />
             </div>
+ 
             
         </div>
         

@@ -90,10 +90,10 @@ class Home extends Component {
 
                 <input
                     type="submit" value="Bejelentkezem"
-                    className="btn btn-outline-warning btn-block mt-4"
+                    className="btn btn-primary btn-block mt-4"
                 />
                 <hr />
-              <Link to="/create-user" className="btn btn-outline-warning btn-block mt-4">
+              <Link to="/create-user" className="btn btn-warning btn-block mt-4">
                   Regisztrálok
               </Link>
               <br />

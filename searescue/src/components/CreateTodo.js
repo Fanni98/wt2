@@ -182,11 +182,11 @@ class CreateTodo extends Component {
                     <div className="col-md-8 m-auto">
                     <br />
                         <div className="col-md-6">
-                            <Link to={`/show-user/${user._id}`} className="btn btn-outline-info btn-lg btn-block">
+                            <Link to={`/show-user/${user._id}`} className="btn btn-primary btn-lg btn-block">
                                 Profilom
                             </Link>
                             <br />
-                            <Link to="/logout" className="btn btn-outline-danger btn-lg btn-block">
+                            <Link to="/logout" className="btn btn-danger btn-lg btn-block">
                                 Kijelentkezés
                             </Link>                         
               

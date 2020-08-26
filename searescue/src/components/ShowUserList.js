@@ -49,7 +49,7 @@ class ShowUserList extends Component {
             </div>
 
             <div className="col-md-11">
-              <Link to="/create-user" className="btn btn-outline-warning float-right">
+              <Link to="/create-user" className="btn btn-warning float-right">
                 +
               </Link>
               <br />
