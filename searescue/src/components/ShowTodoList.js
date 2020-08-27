@@ -97,8 +97,11 @@ onDrop(event) {
             </div>
 
             <div className="col-md-11">
-              <Link to="/create" className="btn btn-warning float-right">
+              <Link to="/create" className="btn btn-warning float-right btn-lg">
                 +
+              </Link>
+              <Link to="/auth" className="btn btn-primary float-left btn-lg">
+                Vissza
               </Link>
               <br />
               <br />

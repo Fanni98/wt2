@@ -160,8 +160,11 @@ class CreateTodo extends Component {
                         <input
                             type="submit"
                             value="+"
-                            className="btn btn-outline-warning btn-block mt-4"
+                            className="btn btn-outline-warning btn-block btn-lg"
                         />
+                        <Link to="/auth" className="btn btn-primary btn-block btn-lg">
+                            Mégse
+                        </Link>
                     </form>
                 </div>
             </div>

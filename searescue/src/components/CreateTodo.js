@@ -160,7 +160,7 @@ class CreateTodo extends Component {
         let todoList;
 
         if(todos.length == 0) {
-            todoList = "there is no todo record!";
+            //todoList = "there is no todo record!";
         } else {
             //todos.sort((a, b) => (a.order > b.order) ? 1 : -1)
             todoList = todos.map((todo, k) =>
@@ -248,7 +248,7 @@ class CreateTodo extends Component {
                         <input
                             type="submit"
                             value="+"
-                            className="btn btn-outline-warning btn-block mt-4"
+                            className="btn btn-outline-warning btn-block btn-lg"
                         />
                     </form>
                 </div>

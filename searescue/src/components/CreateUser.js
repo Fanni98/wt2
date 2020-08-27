@@ -33,7 +33,7 @@ class CreateUser extends Component {
           name: '',
           password:''
         })
-        this.props.history.push('/');
+        this.props.history.push('/users');
       })
       .catch(err => {
         console.log("Error in CreateUser!");
@@ -47,7 +47,7 @@ class CreateUser extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Regisztráció</h1>
+              <h1 className="display-4 text-center">Új felhasználó</h1>
               <br />              
 
               <form noValidate onSubmit={this.onSubmit}>
@@ -79,7 +79,7 @@ class CreateUser extends Component {
 
                 <input
                     type="submit"
-                    value="OK"
+                    value="Hozzáadás"
                     className="btn btn-outline-warning btn-block mt-4"
                 />
               </form>

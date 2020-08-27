@@ -5,9 +5,9 @@ class SelectCustom extends Component {
         super();
 
         this.state = {
-            /*valueObj: {
+            valueObj: {
                 name: 'Felhasználó'
-            },*/
+            },
             listStatus: false
         }
     }
@@ -15,7 +15,7 @@ class SelectCustom extends Component {
         if(this.props.onChange != undefined && typeof this.props.onChange == 'function') {
             this.props.onChange({
                 target: {
-                    name: 'userName',
+                    name: 'selectedUser',
                     value: user
                 }
             })
@@ -27,13 +27,13 @@ class SelectCustom extends Component {
     
 
     render() {
-        console.log(this.props.list)
+        console.log(this.props.value)
         const userName = this.props.value.name == undefined ? 'Felhasználó' : this.props.value.name
         return <div className='form-control'>
-            <span onClick={() => { this.setState({listStatus: true})}}>{userName}</span>
+            <span onClick={() => { this.setState({listStatus: true})}}><i aria-hidden="true" className="icon">🔻 </i> {userName}</span>
             {this.state.listStatus == true && <ul className="list-group list-group-flush">
                     {this.props.list.map(user=>{
-                        return <li className="list-group-item list-group-item-action list-group-item-primary" key={user._id} onClick={this.handleSelectUser.bind(this, user)}>{user.name}</li>
+                        return <li className="list-group-item list-group-item-action " key={user._id} onClick={this.handleSelectUser.bind(this, user)}>{user.name}</li>
                     })}
                 </ul>
             }

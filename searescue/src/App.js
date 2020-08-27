@@ -16,6 +16,7 @@ import ShowTodoList from './components/ShowTodoList';
 import Test from './components/Test';
 import Logout from './components/Logout';
 import CreateTodoAdmin from './components/CreateTodoAdmin';
+import Regist from './components/Regist';
 
 class App extends Component {
   constructor() {
@@ -46,8 +47,9 @@ class App extends Component {
           <AuthRouter parentClass={this} path='/create-todo' component={CreateTodo}/>
           <AuthRouter parentClass={this} path='/test' component={Test} />
           <AuthRouter parentClass={this} path='/logout' component={Logout}/>
-
+          <Route path='/regist' component={Regist}/>
           <Route path='/' component={Home}/>
+          
         </Switch>
       </Router>
     );

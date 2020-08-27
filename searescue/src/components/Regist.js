@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
-import { connect } from 'react-redux';
 
 
-class Home extends Component {
+class Regist extends Component {
   constructor() {
     super();
     this.state = {
       name: '',
       password: '',
-      
-     
+      token:''
       
     };
   }
@@ -30,38 +27,28 @@ class Home extends Component {
     };
 
     axios
-      .post('http://localhost:8082/api/users/login', data)
+      .post('http://localhost:8082/api/users/register', data)
       .then(res => {
         this.setState({
           name: '',
-          password:'',
-          token:''
+          password:''
         })
-
-        localStorage.token=res.data.token
-        setTimeout(() => {
-          this.props.history.push('/auth');
-        }, 100);
+        this.props.history.push('/');
       })
       .catch(err => {
-        console.log("Error in Login!");
+        console.log("Error in CreateUser!");
       })
-
-    
-
-      
   };
 
   render() {
-    
+    const todo = this.state.todo;
     return (
       <div className="App-header">
         <div className="container">
           <div className="row">
-            
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Hello ٩(｡•́‿•̀｡)۶</h1>
-              <br />
+              <h1 className="display-4 text-center">Regisztráció</h1>
+              <br />              
 
               <form noValidate onSubmit={this.onSubmit}>
                 <div className='form-group'>
@@ -82,25 +69,20 @@ class Home extends Component {
                     placeholder='Jelszó'
                     name='password'
                     className='form-control'
+                    minLength='6'
                     value={this.state.password}
                     onChange={this.onChange}
                   />
                 </div>
                 <hr />
 
+
                 <input
-                    type="submit" value="Bejelentkezem"
-                    className="btn btn-primary btn-block btn-lg"
+                    type="submit"
+                    value="OK"
+                    className="btn btn-outline-warning btn-block mt-4"
                 />
-                <hr />
-              <Link to="/regist" className="btn btn-warning btn-block btn-lg">
-                  Regisztrálok
-              </Link>
-              <br />
-              <br />
-              <hr />
               </form>
-              
           </div>
           </div>
         </div>
@@ -108,7 +90,5 @@ class Home extends Component {
     );
   }
 }
-export default connect(store => ({
-  user: store.user
-}))(Home)
 
+export default Regist;
