@@ -66,6 +66,7 @@ class Regist extends Component {
                 <div className='form-group'>
                   <input
                     type='password'
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     placeholder='Jelszó'
                     name='password'
                     className='form-control'
@@ -80,10 +81,11 @@ class Regist extends Component {
                 <input
                     type="submit"
                     value="OK"
-                    className="btn btn-outline-warning btn-block mt-4"
+                    className="btn btn-warning btn-block mt-4"
                 />
               </form>
           </div>
+
           </div>
         </div>
       </div>

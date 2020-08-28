@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import {SetDefaultUserData} from '../adapters/user/actions'
 
 class showUserDetails extends Component {
   constructor(props) {
@@ -36,10 +37,24 @@ class showUserDetails extends Component {
   };
 
   onDeleteClick (id) {
+    const isAdmin= this.props.user.data.admin;
+    
     axios
       .delete('http://localhost:8082/api/users/'+id)
       .then(res => {
-        this.props.history.push("/users");
+        if (isAdmin == true){
+          localStorage.removeItem('token')
+          this.props.parentClass.setState({isLoggedIn: false})
+          this.props.dispatch(SetDefaultUserData())
+          this.props.history.push("/users");
+       
+        } else {
+          localStorage.removeItem('token')
+          this.props.parentClass.setState({isLoggedIn: false})
+          this.props.dispatch(SetDefaultUserData())
+          this.props.history.push('/');
+        }
+        
       })
       .catch(err => {
         console.log("Error form ShowUserDetails_deleteClick");

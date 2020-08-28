@@ -6,8 +6,11 @@ import axios from 'axios';
 class PreLoad extends Component {
   constructor() {
     super();
+    
 
   }
+  
+
 
   componentDidMount() {
         console.log('before',this.props)
