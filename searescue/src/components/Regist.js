@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
 
+const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+const mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
 
 class Regist extends Component {
   constructor() {
@@ -9,13 +11,22 @@ class Regist extends Component {
     this.state = {
       name: '',
       password: '',
-      token:''
+      token:'',
+      backgroundColor: "#4285F4"
       
     };
+   
   }
-
+ 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    if(strongRegex.test(e.target.value)) {
+      this.setState({ backgroundColor: "#0F9D58" ,  [e.target.name]: e.target.value});
+      } else if(mediumRegex.test(e.target.value)) {
+          this.setState({ backgroundColor: "#F4B400",  [e.target.name]: e.target.value });
+      } else {
+          this.setState({ backgroundColor: "#DB4437",  [e.target.name]: e.target.value });
+      }
+   
   };
 
   onSubmit = e => {
@@ -36,7 +47,7 @@ class Regist extends Component {
         this.props.history.push('/');
       })
       .catch(err => {
-        console.log("Error in CreateUser!");
+        console.log("Error in Register!");
       })
   };
 
@@ -63,25 +74,26 @@ class Regist extends Component {
                 </div>
                 <hr />
 
-                <div className='form-group'>
-                  <input
-                    type='password'
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                    placeholder='Jelszó'
-                    name='password'
-                    className='form-control'
-                    minLength='6'
-                    value={this.state.password}
-                    onChange={this.onChange}
-                  />
-                </div>
-                <hr />
+                
 
+                <div className='form-control' style={{ backgroundColor: this.state.backgroundColor }}>
+                  <p><label htmlFor="password">Jelszó: </label></p>
+                  <input type="password" value={this.state.password} name="password" className='form-control' onChange={this.onChange} />
+                </div>
+                
+
+                <h1>Minél erősebb a jelszó annál biztonságosabb 😉</h1>
+                <p className="password">Kis és nagy betű, speciális karakterek, számok és legalább 8 karakter</p>
+                <p className="password">🔴 gyenge</p>
+                <p className="password">🟡 közepes</p>
+                <p className="password">🟢 erős</p>
+
+                <hr />
 
                 <input
                     type="submit"
                     value="OK"
-                    className="btn btn-warning btn-block mt-4"
+                    className="btn btn-warning btn-block btn-lg"
                 />
               </form>
           </div>

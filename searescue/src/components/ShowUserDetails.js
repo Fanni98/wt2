@@ -43,9 +43,6 @@ class showUserDetails extends Component {
       .delete('http://localhost:8082/api/users/'+id)
       .then(res => {
         if (isAdmin == true){
-          localStorage.removeItem('token')
-          this.props.parentClass.setState({isLoggedIn: false})
-          this.props.dispatch(SetDefaultUserData())
           this.props.history.push("/users");
        
         } else {

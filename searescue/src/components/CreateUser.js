@@ -80,7 +80,7 @@ class CreateUser extends Component {
                 <input
                     type="submit"
                     value="Hozzáadás"
-                    className="btn btn-outline-warning btn-block mt-4"
+                    className="btn btn-outline-warning btn-block btn-lg"
                 />
               </form>
           </div>
