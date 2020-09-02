@@ -24,6 +24,8 @@ class CreateTodo extends Component {
         order:'',
         userId:'',
         userName: '',
+        userId2:'',
+        userName2: '',
         admin: '',
        
         
@@ -58,6 +60,8 @@ class CreateTodo extends Component {
             order: this.state.order,
             userId: this.props.user.data._id,
             userName:this.props.user.data.name,
+            userId2:  this.props.user.data._id,
+            userName2:this.props.user.data.name,
             admin:this.props.user.data.admin
  
             
@@ -76,6 +80,8 @@ class CreateTodo extends Component {
                 order:'',
                 userId: '',
                 userName: '',
+                userId2: '',
+                userName2: '',
                 admin:''
                 })
                 this.getTodos()
@@ -89,7 +95,7 @@ class CreateTodo extends Component {
     } 
 
     getTodos() {
-        let url = 'http://localhost:8082/api/todos/user/'
+        let url = 'http://localhost:8082/api/todos/user/' || 'http://localhost:8082/api/todos/user2/'
         if(this.props.user.data != null && this.props.user.data._id != undefined)  {
             url += this.props.user.data._id
         }

@@ -33,10 +33,11 @@ const TodoCardAdmin = (props) => {
                 </Link> 
                 <br />
                 <br />  
-                <br />
-                <br /> 
                 <h1 className="user">
                     { todo.userName }     
+                </h1>
+                <h1 className="user">
+                    { todo.userName2 }     
                 </h1>
             </div>      
         </div>

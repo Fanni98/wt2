@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {LoginUser} from '../adapters/user/actions'
 import axios from 'axios';
-import {SetDefaultUserData} from '../adapters/user/actions'
 
 class PreLoad extends Component {
   constructor() {

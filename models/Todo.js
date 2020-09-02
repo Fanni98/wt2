@@ -26,9 +26,14 @@ const TodoSchema = new mongoose.Schema({
   },
   userId: {
     type: String
-  }
-  ,
+  },
+  userId2: {
+    type: String
+  },
   userName: {
+    type: String
+  },
+  userName2: {
     type: String
   }
 });

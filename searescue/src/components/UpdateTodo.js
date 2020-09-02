@@ -109,15 +109,15 @@ class UpdateTodo extends Component {
             </div>
             <br />
             
-            <button type="submit" className="btn btn-outline-info btn-lg btn-block">Módosítás</button>
+            <button type="submit" className="btn btn-info btn-lg btn-block">Módosítás</button>
             </form>
             <br />
-            <div className="col-md-6">
-            <Link to="/auth" className="btn btn-outline-warning float-left">
+            
+            <Link to="/auth" className="btn btn-outline-warning btn-lg btn-block">
                   Mégse
               </Link>
                 <br />
-            </div>
+            
           </div>
 
         </div>

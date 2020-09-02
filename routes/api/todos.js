@@ -18,6 +18,12 @@ router.get('/user/:userId', (req, res) => {
     .then(todos => res.json(todos))
     .catch(err => res.status(404).json({ notodosfound: 'No Todos found' }));
 });
+router.get('/user2/:userId2', (req, res) => {
+    Todo.find({userId2: req.params.userId2})
+    .then(todos => res.json(todos))
+    .catch(err => res.status(404).json({ notodosfound: 'No Todos found' }));
+});
+
 
 router.get('/:id', (req, res) => {
     Todo.findById(req.params.id)

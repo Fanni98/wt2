@@ -7,7 +7,9 @@ import {SetDefaultUserData} from '../adapters/user/actions'
 class Logout extends Component {
   constructor() {
     super();
-    this.events = [
+    
+   
+    /*this.events = [
       "load",
       "mousemove",
       "mousedown",
@@ -24,9 +26,10 @@ class Logout extends Component {
       window.addEventListener(this.events[i], this.resetTimeout);
     }
 
-    this.setTimeout();
+    this.setTimeout();*/
   }
 
+  /*
   clearTimeout() {
     if (this.warnTimeout) clearTimeout(this.warnTimeout);
 
@@ -48,15 +51,17 @@ class Logout extends Component {
     alert("You will be logged out automatically in 1 minute.");
   }
 
+  
   logout() {
-    // Send a logout request to the API
-    console.log("Sending a logout request to the API...");
-    localStorage.removeItem('token')
-    this.props.parentClass.setState({isLoggedIn: false})
-    this.props.dispatch(SetDefaultUserData())
-    this.props.history.push('/');
-    this.destroy(); // Cleanup
-  }
+    if({isLoggedIn:true}){
+      // Send a logout request to the API
+      console.log("Sending a logout request to the API...");
+      localStorage.removeItem('token')
+      this.props.parentClass.setState({isLoggedIn: false})
+      this.props.dispatch(SetDefaultUserData())
+      this.props.history.push('/');
+      this.destroy(); // Cleanup
+  }}
 
   destroy() {
     this.clearTimeout();
@@ -65,7 +70,7 @@ class Logout extends Component {
       window.removeEventListener(this.events[i], this.resetTimeout);
     }
   }
-
+*/
 
   
   componentDidMount(){

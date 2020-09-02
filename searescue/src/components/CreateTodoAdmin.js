@@ -6,10 +6,11 @@ import { CirclePicker } from 'react-color';
 import { connect } from 'react-redux';
 
 import SelectCustom from './SelectCustom';
+import SelectAnotherCustom from './SelectAnotherCustom';
 import {SetDefaultUserData} from '../adapters/user/actions'
 
   
-class CreateTodo extends Component {
+class CreateTodoAdmin extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +24,7 @@ class CreateTodo extends Component {
         background:'',
         order:'',
         selectedUser: {},
+        selectedUser2: {},
         users: []
       
     };
@@ -49,7 +51,9 @@ class CreateTodo extends Component {
             background: this.state.background,
             order: this.state.order,
             userId: this.state.selectedUser._id,
-            userName:this.state.selectedUser.name
+            userName:this.state.selectedUser.name,
+            userId2: this.state.selectedUser2._id,
+            userName2: this.state.selectedUser2.name
  
             
         };
@@ -66,6 +70,7 @@ class CreateTodo extends Component {
                 background:'',
                 order:'',
                 selectedUser: {},
+                selectedUser2: {}
                 })
 
                 this.props.history.push('/todos');
@@ -158,6 +163,10 @@ class CreateTodo extends Component {
                        <SelectCustom list={users}
                             value={this.state.selectedUser}
                             onChange={this.onChange}/>
+                        <hr />
+                        <SelectAnotherCustom list={users}
+                            value={this.state.selectedUser2}
+                            onChange={this.onChange}/>
                         </div>
  
                         <hr />
@@ -183,4 +192,4 @@ class CreateTodo extends Component {
 }
 export default connect(store => ({
     user: store.user
-  }))(CreateTodo)
+  }))(CreateTodoAdmin)
