@@ -126,3 +126,13 @@ h1{
   font-size: 40px;
 }
 
+.time {
+  position: fixed;
+  right: 0;
+  top: 0;
+  background-color:wheat;
+  padding:10px;
+  color: blue;
+  
+
+}

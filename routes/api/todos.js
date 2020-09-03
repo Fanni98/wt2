@@ -14,12 +14,12 @@ router.get('/', (req, res) => {
 });
 
 router.get('/user/:userId', (req, res) => {
-    Todo.find({userId: req.params.userId})
-    .then(todos => res.json(todos))
-    .catch(err => res.status(404).json({ notodosfound: 'No Todos found' }));
-});
-router.get('/user2/:userId2', (req, res) => {
-    Todo.find({userId2: req.params.userId2})
+    Todo.find({
+        $or: [
+            {userId: req.params.userId},
+            {userId2: req.params.userId}
+        ]
+    })
     .then(todos => res.json(todos))
     .catch(err => res.status(404).json({ notodosfound: 'No Todos found' }));
 });

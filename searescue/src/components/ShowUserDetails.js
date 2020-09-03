@@ -58,7 +58,6 @@ class showUserDetails extends Component {
       })
   };
 
-
   render() {
 
     const user = this.state.user;
@@ -99,13 +98,12 @@ class showUserDetails extends Component {
             </div>
             <div className="col-md-6">
                 <button type="button" className="btn btn-outline-danger btn-lg btn-block" onClick={this.onDeleteClick.bind(this,user._id)}>Töröl</button><br />
-            </div> 
-            <div className="col-md-6">
-            <Link to="/auth" className="btn btn-outline-warning float-left">
+            </div>   
+            <Link to="/auth" className="btn btn-outline-warning btn-lg btn-block">
                   Mégse
-              </Link>
+            </Link>
                 <br />
-            </div>
+           
           </div>  
         </div>
       </div>

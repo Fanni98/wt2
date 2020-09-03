@@ -37,8 +37,7 @@ class showTodoDetails extends Component {
         console.log("Error form ShowTodoDetails_deleteClick");
       })
   };
-
-
+  
 
   render() {
 

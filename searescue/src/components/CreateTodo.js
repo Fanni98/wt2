@@ -95,7 +95,7 @@ class CreateTodo extends Component {
     } 
 
     getTodos() {
-        let url = 'http://localhost:8082/api/todos/user/' || 'http://localhost:8082/api/todos/user2/'
+        let url = 'http://localhost:8082/api/todos/user/'
         if(this.props.user.data != null && this.props.user.data._id != undefined)  {
             url += this.props.user.data._id
         }

@@ -39,6 +39,7 @@ class Home extends Component {
         })
 
         localStorage.token=res.data.token
+        localStorage.logoutTime= Date.now() + 300000
         setTimeout(() => {
           this.props.history.push('/auth');
         }, 100);

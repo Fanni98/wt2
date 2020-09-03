@@ -17,6 +17,7 @@ import Test from './components/Test';
 import Logout from './components/Logout';
 import CreateTodoAdmin from './components/CreateTodoAdmin';
 import Regist from './components/Regist';
+import Time from './components/Time';
 
 class App extends Component {
   constructor() {
@@ -29,7 +30,9 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+     <div>
+        {this.state.isLoggedIn == true && <Time />}
+        <Router>
         <Switch>
 
           <AuthRouter parentClass={this} path='/users' component={ShowUserList} />
@@ -52,6 +55,7 @@ class App extends Component {
           
         </Switch>
       </Router>
+     </div>
     );
   }
 }
